@@ -23,7 +23,7 @@ class CaseStudySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CaseStudy
-        fields = ['id', 'name', 'details', 'image_url']
+        fields = ['id', 'name', 'details', 'image_url', 'date']
 
     def get_image_url(self, obj):
         request = self.context.get('request')
