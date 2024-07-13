@@ -44,3 +44,18 @@ class CompanySerializer(serializers.ModelSerializer):
         if obj.image:
             return request.build_absolute_uri(obj.image.url)
         return None
+
+
+class SegmentSerializer(serializers.ModelSerializer):
+
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Segment
+        fields = ['id','case_study','segment_no','title','image_url', 'content']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None

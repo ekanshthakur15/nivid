@@ -25,3 +25,16 @@ class CaseStudy(models.Model):
 class Company(models.Model):
 
     image = models.ImageField(upload_to="companies/")
+
+
+class Segment(models.Model):
+
+    case_study = models.ForeignKey(CaseStudy, on_delete= models.CASCADE)
+    segment_no = models.IntegerField()
+    title = models.TextField()
+    image = models.ImageField(blank= True , null= True)
+    content = models.TextField(blank=True, null= True)
+
+    def __str__(self):
+        return f"{self.case_study.name} : Segment {self.segment_no}"
+

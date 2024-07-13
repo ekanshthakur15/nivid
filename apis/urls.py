@@ -8,4 +8,5 @@ urlpatterns = [
     path("case-studies/",CaseStudyListAPIView.as_view()),
     path("case-studies/details/<int:id>/", CaseStudyDetailAPIView.as_view()),
     path("companies/", CompanyListAPIView.as_view()),
+    path("case-studies/segments/<int:id>", SegmentsAPIView.as_view()),
 ]

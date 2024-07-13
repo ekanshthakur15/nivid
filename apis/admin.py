@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Service)
 admin.site.register(CaseStudy)
 admin.site.register(Company)
+admin.site.register(Segment)

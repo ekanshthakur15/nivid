@@ -65,3 +65,18 @@ class CompanyListAPIView(APIView):
         companies = Company.objects.all()
         serializer = CompanySerializer(companies, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+class SegmentsAPIView(APIView):
+
+    def get(self,request, id):
+        try:
+            case_study = CaseStudy.objects.get(id = id)
+        except CaseStudy.DoesNotExist:
+            return Response({"errors":"Case Study doesn't exist"}, status= status.HTTP_404_NOT_FOUND)
+        
+        segments = Segment.objects.filter(case_study = case_study)
+
+        serializer = SegmentSerializer(segments, many = True, context = {'request':request})
+        
+        return Response(serializer.data, status= status.HTTP_200_OK)
