@@ -58,3 +58,10 @@ class CaseStudyDetailAPIView(APIView):
         serializer = CaseStudySerializer(case_study, context={'request': request})
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+class CompanyListAPIView(APIView):
+    def get(self, request):
+        companies = Company.objects.all()
+        serializer = CompanySerializer(companies, many=True, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
