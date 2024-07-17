@@ -12,12 +12,21 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
+class SubService(models.Model):
+
+    service = models.ForeignKey(Service, on_delete= models.CASCADE)
+    title = models.CharField(max_length=50)
+    details = models.TextField()
+    image = models.ImageField(upload_to='sub_service/', blank=True, null= True)
+
+    def __str__(self) -> str:
+        return self.title
+
 class CaseStudy(models.Model):
     name = models.CharField(max_length=100)
     details = models.TextField()
     date = models.DateField(default=timezone.now, blank= True, null= True)
     image = models.ImageField(upload_to='case_study_images/', blank=True, null=True)
-
 
     def __str__(self):
         return self.name
@@ -37,4 +46,3 @@ class Segment(models.Model):
 
     def __str__(self):
         return f"{self.case_study.name} : Segment {self.segment_no}"
-

@@ -80,3 +80,18 @@ class SegmentsAPIView(APIView):
         serializer = SegmentSerializer(segments, many = True, context = {'request':request})
         
         return Response(serializer.data, status= status.HTTP_200_OK)
+    
+
+class SubServiceAPIView(APIView):
+
+    def get(self,request, id):
+        try:
+            service = Service.objects.get(id = id)
+        except Service.DoesNotExist:
+            return Response({"errors":"Service doesn't exist"}, status= status.HTTP_404_NOT_FOUND)
+        
+        sub_services = Segment.objects.filter(service = service)
+
+        serializer = SubserviceSerializer(sub_services, many = True, context = {'request':request})
+        
+        return Response(serializer.data, status= status.HTTP_200_OK)

@@ -59,3 +59,17 @@ class SegmentSerializer(serializers.ModelSerializer):
         if obj.image:
             return request.build_absolute_uri(obj.image.url)
         return None
+
+class SubserviceSerializer(serializers.ModelSerializer):
+
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SubService
+        fields = ['id','service','title','details','image_url']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
