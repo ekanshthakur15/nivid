@@ -90,7 +90,7 @@ class SubServiceAPIView(APIView):
         except Service.DoesNotExist:
             return Response({"errors":"Service doesn't exist"}, status= status.HTTP_404_NOT_FOUND)
         
-        sub_services = Segment.objects.filter(service = service)
+        sub_services = SubService.objects.filter(service = service)
 
         serializer = SubserviceSerializer(sub_services, many = True, context = {'request':request})
         
